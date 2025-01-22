@@ -7,7 +7,8 @@ def cargar_buffer(entrada, inicio, tamano_buffer):
 
 def procesar_buffer(buffer):
   # Procesar y extraer lexemas del buffer
-  pass
+   buffer = cargar_buffer(entrada, inicio_entrada, tamano_buffer)
+   
 
 entrada = list("Esto es un ejemplo eof")
 inicio = 0
