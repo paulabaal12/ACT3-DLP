@@ -1,37 +1,48 @@
-# Código base para iniciar
+
 def cargar_buffer(entrada, inicio, tamano_buffer):
-  buffer = entrada[inicio:inicio + tamano_buffer]
-  if len(buffer) < tamano_buffer:
-    buffer.append("eof")
-  return buffer
+    #Carga un fragmento de la entrada dentro del buffer
+    buffer = entrada[inicio:inicio + tamano_buffer]
+    if len(buffer) < tamano_buffer:
+        buffer.extend(["eof"] * (tamano_buffer - len(buffer)))
+    return buffer
 
-def procesar_buffer(buffer):
-  # Procesar y extraer lexemas del buffer
-   buffer = cargar_buffer(entrada, inicio, tamano_buffer)
+def procesar_buffer(buffer, lexema_incompleto):
+    #Se procesan y extraen los lexemas del buffer
+    lexemas = []
+    lexema_actual = lexema_incompleto
+    for caracter in buffer:
+        if caracter.isspace() or caracter == "eof":
+            if lexema_actual:
+                lexemas.append(lexema_actual)
+                lexema_actual = ""
+            if caracter == "eof":
+                break
+        else:
+            lexema_actual += caracter
+    return lexemas, lexema_actual
 
-   
-entrada = list("Esto es un ejemplo eof")
-inicio = 0
+def procesar_entrada(entrada, tamano_buffer):
+    #Procesa la entrada completa utilizando el manejo de fragmentos mediante el buffer
+    inicio = 0
+    lexema_incompleto = ""
+
+    while inicio < len(entrada):
+        buffer = cargar_buffer(entrada, inicio, tamano_buffer)
+
+        lexemas, lexema_incompleto = procesar_buffer(buffer, lexema_incompleto)
+
+        for lexema in lexemas:
+            print(f"Lexema procesado: {lexema}")
+
+        # Actualizar el puntero para cargar el siguiente fragmento
+        inicio += tamano_buffer
+
+    # Imprimir cualquier lexema incompleto que quede al final
+    if lexema_incompleto:
+        print(f"Lexema procesado: {lexema_incompleto}")
+
+# Entrada de prueba
+entrada = list("Esto es un ejemplo de entrada con eof")
 tamano_buffer = 10
-buffer = cargar_buffer(entrada, inicio, tamano_buffer)
-procesar_buffer(buffer)
 
-
-def extraer_lexema(buffer):
-    lexema = []
-    while buffer:
-        char = buffer.pop(0)
-        if char == " " or char == "eof":
-            break
-        lexema.append(char)
-    return ''.join(lexema)
-
-while True:
-    lexema = extraer_lexema(buffer)
-    if lexema:
-        print(f"Lexema: {lexema}")
-    if "eof" in buffer:
-        break
-    inicio += len(lexema) + 1
-    buffer = cargar_buffer(entrada, inicio, tamano_buffer)
-
+procesar_entrada(entrada, tamano_buffer)
