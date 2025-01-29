@@ -70,4 +70,13 @@ Lexema procesado: eof
 - **Manejo de Lexemas Incompletos:** Si un lexema está dividido entre dos buffers, el programa conserva la parte incompleta y la completa al procesar el siguiente buffer.
 - **"eof":** Se utiliza como marcador para indicar el final de la entrada.
 
+## Video de Ejecución
+A continuación se muestra el enlace al video del funcionamiento y ejecución del programa:
+[Enlace a video](https://youtu.be/CImyw4KiR64).
 
+## Desarrollado por:
+- **[Mónica Salvatierra - 22249](https://github.com/alee2602)**
+- **[Paula Barillas - 22764](https://github.com/paulabaal12)**
+- **[Derek Arreaga - 22537](https://github.com/FabianKel)**
+- **[Andrés Kou - 22305](https://github.com/EdwinOrtegaK)**
+- **[Esteban Zambrano - 22119](https://github.com/EstebanZG999)**
